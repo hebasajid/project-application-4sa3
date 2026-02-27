@@ -1,0 +1,14 @@
+{
+  "name": "project-application-4sa3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db-test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^7.1.0"
+  }
+}
