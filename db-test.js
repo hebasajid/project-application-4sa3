@@ -1,7 +1,8 @@
 const {MongoClient} = require('mongodb');
 
-const uri =  "mongodb+srv://hsajid35467:educationcloud@cluster0.pabkhte.mongodb.net/";
-const client= new MongoClient(uri);
+const config = require('./config'); // pulling  data from config.js
+
+const client = new MongoClient(config.mongoURI);
 
 async function run() { 
     try {
@@ -16,8 +17,13 @@ async function run() {
             type: 'Digital PDF',
             price: 6.00
         };
+
         const result = await inventory.insertOne(doc);
         console.log(`Successfully added test product with ID: ${result.insertedId}`);
+
+        const showDB = await database.collection('inventory').findOne({});
+        console.log("Found entry:", showDB);
+
 
         } catch (error) {
          console.error("Database connection failed:", error);

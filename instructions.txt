@@ -1,0 +1,3 @@
+Make sure you are in the projects directory. 
+In the terminal, type node db-test.js and the connection to the 
+database should be successful.
