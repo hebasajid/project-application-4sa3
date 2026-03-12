@@ -1,3 +1,5 @@
 Make sure you are in the projects directory. 
-In the terminal, type node db-test.js and the connection to the 
+In the terminal, type npm install to
+install all dependencies. 
+Then type node db-test.js and the connection to the 
 database should be successful.
