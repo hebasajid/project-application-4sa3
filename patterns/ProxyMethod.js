@@ -1,4 +1,7 @@
 //using Stripe as the payment gateway
+const StripeService = require('../services/StripeService');
+const MongoService = require('../services/MongoService');
+
 class ProxyMethod {
 
     constructor() {
