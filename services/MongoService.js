@@ -3,12 +3,26 @@ const config = require('../config'); // pulling data from config.js
 
 class MongoService {
     constructor() {
-        this.connectionString = config.mongoURI; 
+        if (MongoService.instance) { //checking if instance already exists for database connection
+            return MongoService.instance; //singleton pattern to ensure only one connection instance is created
+        }
+
+        this._connect();
+        MongoService.instance = this; // saving the instance
     }
 
-async logTransaction(data) {
-        console.log(`[MongoDB] Logging transaction for product ${data.productId}...`);
-        return { logId: "LOG_" + Math.random().toString(36).substr(2, 9), ...data };
+    async _connect() { //establishing connection to MongoDB
+        try {
+            await mongoose.connect(config.mongoURI);
+            console.log("MongoDB Connected Successfully.");
+        } catch (err) {
+            console.error("Database Connection Error:", err.message);
+        }
+    }
+    
+    async logTransaction(data) {
+        console.log(`[MongoDB] Logging trace for Product: ${data.productId}`);
+        return { id: "log_" + Date.now(), ...data }; 
     }
 }
 

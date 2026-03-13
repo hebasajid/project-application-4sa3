@@ -1,6 +1,5 @@
 const FactoryMethod = require('./patterns/FactoryMethod');
 const ProxyMethod = require('./patterns/ProxyMethod');
-const SingletonMethod = require('./patterns/SingletonMethod');
 
 async function main() {
     // using the factory to create a product
