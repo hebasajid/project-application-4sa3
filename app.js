@@ -3,7 +3,7 @@ const ProxyMethod = require('./patterns/ProxyMethod');
 
 async function main() {
     
-// using the factory to create a product
+// using the factory to create a product -hardcoded for testing purposes
 
 try{
     const book = FactoryMethod.createProduct(
@@ -17,7 +17,7 @@ try{
 
     console.log("Processing payment for:", book.name);
 
-    const result = await paymentGate.process({ name: "Student_User" }, book);
+    const result = await paymentGate.process({ name: "Student_User" }, book); //users info and prod. details passed to  proxy for processing
         
         console.log("--- Purchase Complete!! ---");
         console.log("Product:", book.name);

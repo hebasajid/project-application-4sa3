@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const { MongoClient} = require('mongodb');
 const config = require('../config'); // pulling data from config.js
 
 class MongoService {
