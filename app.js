@@ -17,10 +17,11 @@ try{
 
     console.log("Processing payment for:", book.name);
 
-    const result = await paymentGate.process({ name: "Student_User" }, book); //users info and prod. details passed to  proxy for processing
+    const result = await paymentGate.process({ name: "Student" }, book); //users info and prod. details passed to  proxy for processing
         
         console.log("--- Purchase Complete!! ---");
         console.log("Product:", book.name);
+        console.log("Description:", book.description);
         console.log("Amount Charged: $", book.price);
         console.log("Stripe Transaction ID:", result.id);
     
