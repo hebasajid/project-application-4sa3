@@ -19,6 +19,14 @@ class StripeService {
                 automatic_payment_methods: { enabled: true, allow_redirects: 'never' }
             });
    
+            //api response: success or failure
+            console.log(`[Stripe API] Response received! ID: ${paymentIntent.id}`);
+            return paymentIntent;
+
+            } catch (error) {
+            console.error("[Stripe API] Connection Error:", error.message);
+            throw error;
+        }
 }
 
 module.exports = StripeService;
