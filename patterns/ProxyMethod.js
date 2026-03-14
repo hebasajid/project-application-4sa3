@@ -21,7 +21,24 @@ class ProxyMethod {
             });
 
             console.log(`[Proxy] Traceability log created.`);
+
+        // calling the real stripe service to process the payment
+        const stripeResponse = await this.realStripe.charge(product.price, product.name);
+
+        //logging the successful transaction in the database
+        console.log(`[Proxy] Success! Stripe ID: ${stripeResponse.id}`);
+    
+        return { 
+                success: true, 
+                stripeId: stripeResponse.id,
+                logId: logEntry.id 
+            };
        
+        } catch (error) {
+            console.log(`[Proxy] Payment failed. Error recorded.`);
+            throw error;
+        }
+    }
 }
 
 module.exports = ProxyMethod;
