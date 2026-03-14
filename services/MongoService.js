@@ -7,13 +7,17 @@ class MongoService {
             return MongoService.instance; //singleton pattern to ensure only one connection instance is created
         }
 
+        this.client = new MongoClient(config.mongoURI);
+        this.db = null;
         this._connect();
-        MongoService.instance = this; // saving the instance
+        
+        MongoService.instance = this;
     }
 
     async _connect() { //establishing connection to MongoDB
         try {
-            await mongoose.connect(config.mongoURI);
+            await this.client.connect(config.mongoURI);
+            this.db = this.client.db('education_cloud');
             console.log("MongoDB Connected Successfully.");
             
         } catch (err) {
@@ -23,7 +27,18 @@ class MongoService {
     
     async logTransaction(data) {
         console.log(`[MongoDB] Logging trace for Product: ${data.productId}`);
-        return { id: "log_" + Date.now(), ...data }; 
+       try {
+            if (!this.db) {
+                // If called before connection is ready, we use the client directly
+                const tempDb = this.client.db('education_cloud');
+                await tempDb.collection('logs').insertOne({ ...data, timestamp: new Date() });
+            } else {
+                await this.db.collection('logs').insertOne({ ...data, timestamp: new Date() });
+            }
+            console.log("[MongoDB] Transaction saved to 'logs' collection.");
+        } catch (error) {
+            console.error("[MongoDB] Error saving to database:", error.message);
+        }
     }
 }
 
