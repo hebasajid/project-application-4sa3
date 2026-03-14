@@ -26,7 +26,7 @@ class ProxyMethod {
         const stripeResponse = await this.realStripe.charge(product.price, product.name);
 
         //logging the successful transaction in the database
-        console.log(`[Proxy] Success! Stripe ID: ${stripeResponse.id}`);
+        console.log(`[Proxy] Success! Stripe Transaction ID: ${stripeResponse.id}`);
         return stripeResponse;
        
         } catch (error) {

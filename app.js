@@ -20,7 +20,6 @@ try{
     const result = await paymentGate.process({ name: "Student_User" }, book);
         
         console.log("--- Purchase Complete!! ---");
-        console.log("Stripe Transaction ID:", result.stripeId);
     
     } catch (err) {
         console.error("--- Purchase Error ---");
