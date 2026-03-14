@@ -1,6 +1,6 @@
 //using Stripe as the payment gateway
 const StripeService = require('../services/StripeService');
-const MongoService = require('../services/MongoService');
+const db = require('../services/MongoService'); //singleton for MongoDB connection and logging transactions
 
 class ProxyMethod {
 
@@ -10,8 +10,8 @@ class ProxyMethod {
     }
 
     async process(user, product) {
-        // traceability: Log start
-        const log = await this.db.logTransaction({
+        // traceability: log start
+        await db.logTransaction({
             user: user.name,
             productId: product.id,
             amount: product.price,
@@ -36,4 +36,4 @@ class ProxyMethod {
     }
 }
 
-module.exports = PaymentProxy;
+module.exports = ProxyMethod;
