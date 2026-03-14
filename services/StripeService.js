@@ -1,4 +1,4 @@
-const config = require('../config/config');
+const config = require('../config');
 
 const stripe = require('stripe')(config.stripeSecretKey); //initializing Stripe with the secret key from config
 
