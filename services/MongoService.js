@@ -26,4 +26,5 @@ class MongoService {
     }
 }
 
-module.exports = MongoService;
+const instance = new MongoService(); //creating a single instance of MongoService to be used across the application
+module.exports = instance;
