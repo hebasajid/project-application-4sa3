@@ -4,6 +4,9 @@ const stripe = require('stripe')(config.stripeSecretKey); //initializing Stripe 
 
 class StripeService {
 
+    async charge(amount, productName) { //method to charge a payment
+        console.log(`[Stripe API] Connecting to Stripe to process: ${productName}...`);
+    
    
 }
 
