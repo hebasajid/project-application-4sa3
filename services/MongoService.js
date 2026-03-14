@@ -15,6 +15,7 @@ class MongoService {
         try {
             await mongoose.connect(config.mongoURI);
             console.log("MongoDB Connected Successfully.");
+            
         } catch (err) {
             console.error("Database Connection Error:", err.message);
         }
