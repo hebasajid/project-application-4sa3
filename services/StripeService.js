@@ -27,6 +27,7 @@ class StripeService {
             console.error("[Stripe API] Connection Error:", error.message);
             throw error;
         }
+    }
 }
 
 module.exports = StripeService;

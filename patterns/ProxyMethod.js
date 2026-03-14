@@ -6,34 +6,22 @@ class ProxyMethod {
 
     constructor() {
         this.realStripe = new StripeService();
-        this.db = new MongoService();
     }
 
     async process(user, product) {
-        // traceability: log start
-        await db.logTransaction({
-            user: user.name,
-            productId: product.id,
-            amount: product.price,
-            status: "initiated"
-        });
-   
-        console.log(`[Proxy] Traceability log created: ${log.logId}`);
+        // creating a traceability log before calling  stripe service
 
-    try {
-            // forwarding to the  Stripe service
-            const stripeResponse = await this.realStripe.charge(product.price);
-            
-            // log updates on success
-            console.log(`[Proxy] Success Stripe ID: ${stripeResponse.id}`);
-            return { success: true, stripeId: stripeResponse.id };
+        try {
+            //tracebaility log entry before calling the real service
+            const logEntry = await db.logTransaction({
+                user: user.name,
+                productId: product.id,
+                amount: product.price,
+                status: "initiated"
+            });
 
-        } catch (error) {
-            // log updates on failure
-            console.log(`[Proxy] Payment failed. Log updated.`);
-            throw error;
-        }
-    }
+            console.log(`[Proxy] Traceability log created.`);
+       
 }
 
 module.exports = ProxyMethod;
