@@ -6,14 +6,14 @@ async function main() {
 // using the factory to create a product
 
 try{
-    const book = ProductFactory.createProduct(
+    const book = FactoryMethod.createProduct(
         "101", //id
         "English Flashcards for Kids",  //name
          6.00, //price
         "Learning English with fun flashcards!"); //description
 
     //proxy to process payment and log transactions:
-    const paymentGate = new PaymentProxy();
+    const paymentGate = new ProxyMethod();
 
     console.log("Processing payment for:", book.name);
 
