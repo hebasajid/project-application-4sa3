@@ -3,8 +3,8 @@ const config = require('../config'); // pulling data from config.js
 
 class MongoService {
     constructor() {
-        if (MongoService.instance) { //checking if instance already exists for database connection
-            return MongoService.instance; //singleton pattern to ensure only one connection instance is created
+        if (MongoService.instance) { //checking if instance already exists for db connection
+            return MongoService.instance; //singleton pattern to ensure only 1 connection instance is made
         }
 
         this.client = new MongoClient(config.mongoURI);
@@ -14,7 +14,7 @@ class MongoService {
         MongoService.instance = this;
     }
 
-    async _connect() { //establishing connection to MongoDB
+    async _connect() { //establishing connection to mongodb
         try {
             await this.client.connect(config.mongoURI);
             this.db = this.client.db('education_cloud');
@@ -29,7 +29,6 @@ class MongoService {
         console.log(`[MongoDB] Logging trace for Product: ${data.productId}`);
        try {
             if (!this.db) {
-                // If called before connection is ready, we use the client directly
                 const tempDb = this.client.db('education_cloud');
                 await tempDb.collection('logs').insertOne({ ...data, timestamp: new Date() });
             } else {
