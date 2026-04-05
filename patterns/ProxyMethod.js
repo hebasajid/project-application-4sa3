@@ -15,7 +15,7 @@ class ProxyMethod {
             //tracebaility log entry before calling the real service
             await db.logTransaction({
                 user: user.name,
-                productId: product.id,
+                productId: product.id, //even if product name chanes, we can still track it by id in the logs
                 amount: product.price,
                 status: "initiated"
             });

@@ -8,15 +8,15 @@ class StripeService {
         console.log(`[Stripe API] Connecting to Stripe to process: ${productName}...`);
     
         try {
-            // API call - sendign data to stripe
+            // API call - sendign data to stripe - from stripe node.js docs
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: Math.round(amount * 100), //converting dollars to cents for stripe
+                amount: Math.round(amount * 100), //converting dollars to cents for stripe since api doc says amount should be in the smallest currency unit
                 currency: 'usd',
                 payment_method: 'pm_card_visa', // test card by stripe
                 confirm: true,
                 description: `M3 Submission Test: ${productName}`,
                 // allows  to run this in CLI without a browser
-                automatic_payment_methods: { enabled: true, allow_redirects: 'never' }
+                automatic_payment_methods: { enabled: true, allow_redirects: 'never' } // prevents stripe from trying to redirect to a browser for 3D secure authentication, which is not possible in this CLI environment
             });
    
             //api response: success or failure

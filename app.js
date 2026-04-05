@@ -7,10 +7,11 @@ async function main() {
 
 try{
     const book = FactoryMethod.createProduct(
-        "101", //id
-        "English Flashcards for Kids",  //name
-         6.00, //price
-        "Learning English with fun flashcards!"); //description
+        "105", //id
+        "Spanish Textbooks",  //name
+         65.00, //price
+        "Spanish Textbook for Beginners!",); //description
+        
 
     //proxy to process payment and log transactions:
     const paymentGate = new ProxyMethod();
